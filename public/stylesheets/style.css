@@ -1,0 +1,13 @@
+
+.card-text {
+  color: #757575;
+}
+
+.price {
+  font-weight: bold;
+  color: #424242;
+}
+
+body {
+  margin-top: 64px;
+}
