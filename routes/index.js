@@ -22,6 +22,14 @@ var Product = class {
   }
 }
 
+//create ES6 class for users
+var User = class {
+  constructor(email, password) {
+    this.email = email;
+    this.password = password;
+  }
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var productList = [];
@@ -30,7 +38,9 @@ router.get('/', function(req, res, next) {
     db.each("SELECT * FROM Products",
       function item(err, row) {
         // add products to list
-        var product = new Product(row.id, row.name, row.price, row.category, row.manufacturer)
+        var product = new Product(row.id, row.name, row.price, row.category, row.manufacturer);
+        //var product = new Product(1, "hoofd", 69.69, "poep", "coerp2");
+        //var productList = { product };
         productList.push(product);
       },
       // when query is complete
@@ -41,6 +51,16 @@ router.get('/', function(req, res, next) {
       });
   });
   db.close();
+});
+
+// GET user sign up page
+router.get('/user/signup', function(req, res, next) {
+  var _user = new User("mattijs.leon@gmail.com", "password");
+  res.render('user/signup', {user: _user});
+});
+
+router.post('/user/signup', function(req, res, next) {
+  res.redirect('/');
 });
 
 module.exports = router;

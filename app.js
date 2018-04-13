@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 // use a more advanced handlebar library
 var expressHandlebars = require('express-handlebars');
+// use sessions
+var session = require('express-session');
 //initialize database and make it safe to use
 var fs = require("fs");
 var file = "products.db";
@@ -27,6 +29,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// enable session
+app.use(session({secret: 'random words are not secure', resave: false, saveUninitialized: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
