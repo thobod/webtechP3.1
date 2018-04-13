@@ -7,6 +7,8 @@ var logger = require('morgan');
 var expressHandlebars = require('express-handlebars');
 // use sessions
 var session = require('express-session');
+// add the passport library for easy authentication
+var passport = require('passport');
 //initialize database and make it safe to use
 var fs = require("fs");
 var file = "products.db";
@@ -31,6 +33,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // enable session
 app.use(session({secret: 'random words are not secure', resave: false, saveUninitialized: false}));
+// add passport to the app
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

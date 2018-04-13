@@ -15,7 +15,10 @@
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
     "passport": "^0.4.0",
+<<<<<<< HEAD
     "passport-local": "^1.0.0",
+=======
+>>>>>>> 2ea9c4362449d86dc550e761dec817b3f8e54839
     "sqlite3": "^4.0.0"
   }
 }
