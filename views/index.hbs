@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-<div class="row">
-
-  <div class="col-lg-3">
-=======
-
 <div class="container">
     <div>
         Order by <select id="orderby">
@@ -23,53 +17,48 @@
             <option value="default" label="None" selected="selected"></option>
         </select>
     </div>
-  <div class="row">
-
-    <div class="col-lg-3">
-
-      <div class="list-group">
-        <a href="#" class="list-group-item">Category 1</a>
-        <a href="#" class="list-group-item">Category 2</a>
-        <a href="#" class="list-group-item">Category 3</a>
-      </div>
->>>>>>> 2ea9c4362449d86dc550e761dec817b3f8e54839
-
-    <div class="list-group">
-      <a href="#" class="list-group-item">Category 1</a>
-      <a href="#" class="list-group-item">Category 2</a>
-      <a href="#" class="list-group-item">Category 3</a>
-    </div>
-
-  </div>
-  <!-- /.col-lg-3 -->
-
-  <div class="col-lg-9">
-
     <div class="row">
-      {{# each products}}
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="{{this.imgSrc}}" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">{{this.name}}</a>
-              </h4>
-              <h5>€{{this.price}}</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              <p class="card-text font-italic">Manufacturer: {{this.manufacturer}}</p>
+
+        <div class="col-lg-3">
+
+            <div class="list-group">
+                <a href="#" class="list-group-item">Category 1</a>
+                <a href="#" class="list-group-item">Category 2</a>
+                <a href="#" class="list-group-item">Category 3</a>
             </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Add to cart</a>
-            </div>
-          </div>
+
         </div>
-      {{/each}}
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+            <div class="row">
+                {{# each products}}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <a href="#"><img class="card-img-top" src="{{this.imgSrc}}" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="#">{{this.name}}</a>
+                            </h4>
+                            <h5>€{{this.price}}</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.col-lg-9 -->
 
     </div>
     <!-- /.row -->
 
-  </div>
-  <!-- /.col-lg-9 -->
-
 </div>
-<!-- /.row -->
+File contents are unchanged.
