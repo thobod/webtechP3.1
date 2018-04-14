@@ -1,38 +1,25 @@
-<<<<<<< HEAD
+<div>
+    Order by <select id="orderby">
+        <option value="default" label="None" selected="selected"></option>
+        <option value="pricelh">Price low to high</option>
+        <option value="pricehl">Price high to low</option>
+        <option value="titleaz">Title A-Z</option>
+        <option value="titleza">Title Z-A</option>
+    </select>
+    Manufacturer <select id="manufacturer">
+        <option value="default" label="None" selected="selected"></option>
+    </select>
+    Catogory <select id="catogory">
+        <option value="default" label="None" selected="selected"></option>
+    </select>
+    Price <select id="price">
+        <option value="default" label="None" selected="selected"></option>
+    </select>
+</div>
+
 <div class="row">
 
   <div class="col-lg-3">
-=======
-
-<div class="container">
-    <div>
-        Order by <select id="orderby">
-            <option value="default" label="None" selected="selected"></option>
-            <option value="pricelh">Price low to high</option>
-            <option value="pricehl">Price high to low</option>
-            <option value="titleaz">Title A-Z</option>
-            <option value="titleza">Title Z-A</option>
-        </select>
-        Manufacturer <select id="manufacturer">
-            <option value="default" label="None" selected="selected"></option>
-        </select>
-        Catogory <select id="catogory">
-            <option value="default" label="None" selected="selected"></option>
-        </select>
-        Price <select id="price">
-            <option value="default" label="None" selected="selected"></option>
-        </select>
-    </div>
-  <div class="row">
-
-    <div class="col-lg-3">
-
-      <div class="list-group">
-        <a href="#" class="list-group-item">Category 1</a>
-        <a href="#" class="list-group-item">Category 2</a>
-        <a href="#" class="list-group-item">Category 3</a>
-      </div>
->>>>>>> 2ea9c4362449d86dc550e761dec817b3f8e54839
 
     <div class="list-group">
       <a href="#" class="list-group-item">Category 1</a>
@@ -55,7 +42,7 @@
                 <a href="#">{{this.name}}</a>
               </h4>
               <h5>€{{this.price}}</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+              <p class="card-text">A description that would tell about this product!</p>
               <p class="card-text font-italic">Manufacturer: {{this.manufacturer}}</p>
             </div>
             <div class="card-footer">

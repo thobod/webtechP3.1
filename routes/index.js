@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
 // database handling
 var fs = require("fs");
 var file = "products.db";
@@ -36,31 +37,51 @@ router.get('/', function(req, res, next) {
   db.serialize(function() {
     // load all products
     db.each("SELECT * FROM Products",
-      function item(err, row) {
-        // add products to list
-        var product = new Product(row.id, row.name, row.price, row.category, row.manufacturer);
-        //var product = new Product(1, "hoofd", 69.69, "poep", "coerp2");
-        //var productList = { product };
-        productList.push(product);
-      },
-      // when query is complete
-      function complete(err, found) {
-        // send information to the view
-        res.render('index', { title: 'Shopping cart', products: productList });
-        //console.log(productList);
-      });
+    function item(err, row) {
+      // add products to list
+      var product = new Product(row.id, row.name, row.price, row.category, row.manufacturer);
+      productList.push(product);
+    },
+    // when query is complete
+    function complete(err, found) {
+      // send information to the view
+      res.render('index', { title: 'Shopping cart', products: productList });
+      //console.log(productList);
+    });
   });
-  db.close();
 });
 
 // GET user sign up page
 router.get('/user/signup', function(req, res, next) {
-  var _user = new User("mattijs.leon@gmail.com", "password");
-  res.render('user/signup', {user: _user});
+  res.render('user/signup');
 });
 
 router.post('/user/signup', function(req, res, next) {
-  res.redirect('/');
+  passport.authenticate('local.signup', function(err, user, info) {
+    if (err) {
+      console.log(err.message);
+      return next(err);
+    }
+    if (!user) {
+      console.log("no user");
+      return res.redirect('/');
+    }
+    console.log(user);
+    return res.redirect('/user/profile');
+  })(req, res, next);
 });
+
+router.get('/user/profile', function(req, res, next) {
+  res.render('user/profile');
+});
+
+router.get('/user/signin', function(req, res, next) {
+  res.render('user/signin');
+})
+
+router.post('/user/signin', passport.authenticate('local.signin', {
+  sucessRedirect: '/user/profile',
+  failureRedirect: '/user/signin'
+}));
 
 module.exports = router;
