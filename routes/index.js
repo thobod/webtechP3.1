@@ -64,7 +64,7 @@ router.post('/user/signup', function(req, res, next) {
     }
     if (!user) {
       console.log("no user");
-      return res.redirect('/');
+      return res.redirect('/user/signup');
     }
     console.log(user);
     return res.redirect('/user/profile');
@@ -79,9 +79,19 @@ router.get('/user/signin', function(req, res, next) {
   res.render('user/signin');
 })
 
-router.post('/user/signin', passport.authenticate('local.signin', {
-  sucessRedirect: '/user/profile',
-  failureRedirect: '/user/signin'
-}));
+router.post('/user/signin', function(req, res, next) {
+  passport.authenticate('local.signin', function(err, user, info) {
+    if (err) {
+      console.log(err.message);
+      return next(err);
+    }
+    if (!user) {
+      console.log("no user");
+      return res.redirect('/user/signin');
+    }
+    console.log(user);
+    return res.redirect('/user/profile');
+  })(req, res, next);
+});
 
 module.exports = router;

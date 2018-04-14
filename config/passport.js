@@ -1,23 +1,18 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+// encrypting module
+var bcrypt = require('bcrypt-nodejs');
+// database initialisation
 var file = "products.db";
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(file);
 
-//debug handling
-const debug = require('debug')('webtechP3.1');
-const name = 'Webshop';
-debug('booting %s and passport.js', name);
+function hashPassword(password) {
+  return bcrypt.hashSync(password);
+}
 
-// ES6 class to represent the user
-var User = class {
-  constructor(email, password) {
-    this.email = email;
-    this.password = password;
-  }
-  validPassword(password) {
-    return this.password === password;
-  }
+function comparePassword(pass1, pass2) {
+  return bcrypt.compareSync(pass1, pass2);
 }
 
 //return the id from the user to the callback funtion
@@ -45,14 +40,20 @@ passport.use('local.signin', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, function(req, email, password, done) {
-  db.get('SELECT id, email FROM Users WHERE email = ? AND password = ?', email, password, function(err, row) {
+  db.get('SELECT id, email FROM Users WHERE email = ?', email, function(err, row) {
     if (err) {
+      console.error("error: " + err.message);
       return done(err);
     }
     if (!row) {
+      console.log("no email found");
       return done(null, false);
     }
-    return done(null, row);
+    if (password == row.password)) {
+      return done(null, row);
+    }
+    console.log("no user found");
+    return done(null, false);
   });
 }));
 
@@ -62,6 +63,8 @@ passport.use('local.signup', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, function(req, email, password, done) {
+  console.log(req.body.fname);
+  console.log(req.body.lname);
   // check if the email already exists
   db.get('SELECT id, email FROM Users WHERE email = ?', email, function(err, row) {
     if (err) {
@@ -75,8 +78,10 @@ passport.use('local.signup', new LocalStrategy({
     }
     // email does not exist yet
     console.log("new user created");
+    //password = hashPassword(password);
+    console.log(password);
     db.serialize(function() {
-      db.run("INSERT INTO Users (email, password) VALUES (?, ?)", email, password, function(err) {
+      db.run("INSERT INTO Users (email, password, fname, lname) VALUES (?, ?, ?, ?)", email, password, req.body.fname, req.body.lname, function(err) {
         if (err) {
           console.error("inserting went wrong");
           return console.error(err.message);
