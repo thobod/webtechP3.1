@@ -49,7 +49,7 @@ passport.use('local.signin', new LocalStrategy({
       console.log("no email found");
       return done(null, false);
     }
-    if (password == row.password)) {
+    if (password == row.password) {
       return done(null, row);
     }
     console.log("no user found");
@@ -79,7 +79,6 @@ passport.use('local.signup', new LocalStrategy({
     // email does not exist yet
     console.log("new user created");
     //password = hashPassword(password);
-    console.log(password);
     db.serialize(function() {
       db.run("INSERT INTO Users (email, password, fname, lname) VALUES (?, ?, ?, ?)", email, password, req.body.fname, req.body.lname, function(err) {
         if (err) {

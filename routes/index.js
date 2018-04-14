@@ -94,4 +94,8 @@ router.post('/user/signin', function(req, res, next) {
   })(req, res, next);
 });
 
+router.post('/', function(req, res, next) {
+  console.log(req.body);
+});
+
 module.exports = router;
