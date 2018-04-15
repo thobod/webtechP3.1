@@ -64,7 +64,7 @@ router.post('/user/signup', function(req, res, next) {
     }
     if (!user) {
       console.log("no user");
-      return res.redirect('/');
+      return res.redirect('/user/signup');
     }
     console.log(user);
     return res.redirect('/user/profile');
@@ -79,9 +79,59 @@ router.get('/user/signin', function(req, res, next) {
   res.render('user/signin');
 })
 
-router.post('/user/signin', passport.authenticate('local.signin', {
-  sucessRedirect: '/user/profile',
-  failureRedirect: '/user/signin'
-}));
+router.post('/user/signin', function(req, res, next) {
+  passport.authenticate('local.signin', function(err, user, info) {
+    if (err) {
+      console.log(err.message);
+      return next(err);
+    }
+    if (!user) {
+      console.log("no user");
+      return res.redirect('/user/signin');
+    }
+    console.log(user);
+    return res.redirect('/user/profile');
+  })(req, res, next);
+});
+
+router.post('/', function(req, res, next) {
+  var productList = [];
+  var ordering = " ORDER BY ";
+  switch (req.body.orderby) {
+    case "priceasc":
+      ordering += "price ASC";
+      break;
+    case "pricedes":
+      ordering += "price DESC";
+      break;
+    case "titleasc":
+      ordering += "name ASC";
+      break;
+    case "titledes":
+      ordering += "name DESC";
+      break;
+    default:
+      ordering = "";
+  }
+  var where = " WHERE ";
+  if (req.body.category) {
+    where += "category ";
+  }
+
+  
+  // load all products
+  db.each("SELECT * FROM Products WHERE category = ?" + ordering, req.body.category,
+  function item(err, row) {
+    // add products to list
+    var product = new Product(row.id, row.name, row.price, row.category, row.manufacturer);
+    productList.push(product);
+  },
+  // when query is complete
+  function complete(err, found) {
+    // send information to the view
+    res.render('index', { title: 'Shopping cart', products: productList });
+    //console.log(productList);
+  });
+});
 
 module.exports = router;

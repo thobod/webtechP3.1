@@ -1,20 +1,40 @@
 <div>
-    Order by <select id="orderby">
-        <option value="default" label="None" selected="selected"></option>
-        <option value="pricelh">Price low to high</option>
-        <option value="pricehl">Price high to low</option>
-        <option value="titleaz">Title A-Z</option>
-        <option value="titleza">Title Z-A</option>
-    </select>
-    Manufacturer <select id="manufacturer">
-        <option value="default" label="None" selected="selected"></option>
-    </select>
-    Catogory <select id="catogory">
-        <option value="default" label="None" selected="selected"></option>
-    </select>
-    Price <select id="price">
-        <option value="default" label="None" selected="selected"></option>
-    </select>
+    <form action="/" method="post">
+      Order by
+      <select id="orderby" name="orderby">
+          <option value="default" label="None" selected="selected"></option>
+          <option value="priceasc">Price low to high</option>
+          <option value="pricedes">Price high to low</option>
+          <option value="titleasc">Title A-Z</option>
+          <option value="titledes">Title Z-A</option>
+      </select>
+      Manufacturer
+      <select id="manufacturer" name="manufacturer">
+          <option value="default" label="None" selected="selected"></option>
+          <option value="johns arts and crafts">Johns arts and crafts</option>
+          <option value="pencil specalists">Pencil specalists</option>
+          <option value="Paint and co.">Paint and co.</option>
+          <option value="star inc.">Star inc.</option>
+      </select>
+      Catogory
+      <select id="catogory" name="category">
+          <option value="default" label="None" selected="selected"></option>
+          <option value="marker">Marker</option>
+          <option value="paper">Paper</option>
+          <option value="paint">Paint</option>
+          <option value="accesories">Accesories</option>
+      </select>
+      Price
+      <select id="price" name="price">
+          <option value="default" label="None" selected="selected"></option>
+          <option value="5">0-5</option>
+          <option value="10">5-10</option>
+          <option value="15">10-15</option>
+          <option value="20">15-20</option>
+          <option value="more">20-more</option>
+      </select>
+      <input type="submit" value="Order">
+    </form
 </div>
 
 <div class="row">
